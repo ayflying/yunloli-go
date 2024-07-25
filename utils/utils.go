@@ -1,17 +1,13 @@
 package utils
 
 import (
-	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gctx"
-	"github.com/gogf/gf/v2/os/gtime"
 	"strconv"
 	"strings"
-	"time"
 )
 
 var (
-	ctx   = gctx.New()
-	Utils *Mod
+	ctx = gctx.New()
 )
 
 type Number interface {
@@ -22,25 +18,8 @@ type Number interface {
 //	interface{} | string | int | int64 | int32 | int16 | uint64 | uint32 | uint16 | float32 | float64
 //}
 
-type Mod struct {
-}
-
-func (m *Mod) Load() {
-	g.Log().Debugf(gctx.New(), "初始化工具类")
-	Utils = &Mod{}
-	return
-}
-
-// 两个时间相隔多少天，需要考虑时区
-func (m *Mod) GetDay(t1 *gtime.Time, t2 *gtime.Time) int {
-	if t2 == nil {
-		t2 = gtime.New(time.UnixMilli(0))
-	}
-	return int(t1.Sub(t2).Hours() / 24)
-}
-
 // 字符串转道具类型
-func (m *Mod) Spilt2Item(str string) (result [][]int64) {
+func Spilt2Item(str string) (result [][]int64) {
 	parts := strings.Split(str, "|") // 分割字符串
 
 	for i := 0; i < len(parts)-1; i += 2 {
@@ -54,7 +33,7 @@ func (m *Mod) Spilt2Item(str string) (result [][]int64) {
 }
 
 // 切片换道具类型
-func (m *Mod) Slice2Item(slice []int64) (res [][]int64) {
+func Slice2Item(slice []int64) (res [][]int64) {
 	res = make([][]int64, 0)
 	for i := 0; i < len(slice)-1; i += 2 {
 		pair := []int64{slice[i], slice[i+1]}
